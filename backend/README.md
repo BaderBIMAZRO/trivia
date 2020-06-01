@@ -68,19 +68,19 @@ One note before you delve into your tasks: for each endpoint you are expected to
 
 ## Documentation
 * This api run locally with the based_url 
-```
+```http
  http://127.0.0.1:5000/
 
 ```
 
 ### GET /categories
 * Categories endpoint that will return id as key and the value as corresponding string of the category 
-```
+```bat
 curl http://127.0.0.1:5000/categories 
 
 ```
 * Expected response from categories endpoint
-```
+```json
 
 {
   "categories": {
@@ -97,12 +97,12 @@ curl http://127.0.0.1:5000/categories
 ```
 ### GET /questions
 * Questions endpoint will fetch the questions paginated for every 10 questions per page and also category key and value for the frontend which the key will be the id number and the value as corresponding string of the category 
-```
+```bat
 curl http://127.0.0.1:5000/questions
 
 ```
 * Expected response from questions endpoint
-```
+```json
 {
   "categories": {
     "1": "Science", 
@@ -193,12 +193,12 @@ curl http://127.0.0.1:5000/questions
 ### DELETE /questions/{question_id}
 * Delete endpoint where the id of question and the page number should be specified below is an successful use of delete request
 
-```
+```bat
 curl -X DELETE http://127.0.0.1:5000/questions/38?page=3
 
 ```
 * Expected response for delete request
-```
+```json
 {
 
   "id": 38, 
@@ -210,11 +210,11 @@ curl -X DELETE http://127.0.0.1:5000/questions/38?page=3
 ### POST /questions?page={page_number}
 * For the post endpoint data should have values for question, answer, difficulty and category numbber from 1-5 that are exist in categories endpoint
 
-```
+```bat
 curl http://127.0.0.1:5000/questions?page=3 -X POST -H "Content-Type: application/json" -d '{"answer": "new answer", "category": "5", "difficulty": 4, "question": "new question" }'
 ```
 * Expected response from post request
-```
+```json
 {
  "message": "The post request have been successfully posted", 
   "success": true
@@ -222,13 +222,13 @@ curl http://127.0.0.1:5000/questions?page=3 -X POST -H "Content-Type: applicatio
 ```
 
 * The ability to search for specific question based of search term.
-```
+```bat
 curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d '{"searchTerm":"cup"}'
 
 ```
 
 *  Expected response
-```
+```json
 {
   "current_category": "search for question", 
   "questions": [
@@ -258,7 +258,7 @@ curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json"
 curl http://127.0.0.1:5000/categories/1/questions
 ``` 
 * Expected response
-```
+```json
 {
   "current_category": "questions by category id", 
   "questions": [
@@ -322,11 +322,11 @@ curl http://127.0.0.1:5000/categories/1/questions
 * here some Error messages you may see and it will returned as json format 
 ### 404 not found
 * This is an example of resource not found 
-```
+```http
 http://127.0.0.1:5000/questions?page=100
 ```
 * Return this error
-```
+```json
 {
   "error": 404,
   "message": "Not found",
@@ -335,12 +335,12 @@ http://127.0.0.1:5000/questions?page=100
 ```
 ### 422 Unpoccessable
 * When try to delete question by id that isn't exist
-```
+```bat
 curl -X DELETE http://127.0.0.1:5000/questions/200
 ```
 * Return 422 with message
 
-```
+```json
 {
   "error": 422,
   "message": "Unpoccessable",
@@ -348,7 +348,7 @@ curl -X DELETE http://127.0.0.1:5000/questions/200
 }
 ```
 * 400 Bad request if you post json data with wrong format example
-```
+```json
 {
         "answer": "new answer",
         "difficulty": 4,
@@ -356,7 +356,7 @@ curl -X DELETE http://127.0.0.1:5000/questions/200
  }
 ```
 * Return 400 bad request
-```
+```json
 {
   "error": 400,
   "message": "Bad request",
@@ -365,13 +365,14 @@ curl -X DELETE http://127.0.0.1:5000/questions/200
 
 ```
 * last error you may see 500 Internal Server Error with json format 
-```
+```json
 {
     "success":False,
     "error":500,
     "message":"Internal Server Error"
  }
 ```
+
 ## Testing
 To run the tests, run
 ```
