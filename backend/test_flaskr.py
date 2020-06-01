@@ -2,7 +2,6 @@ import os
 import unittest
 import json
 from flask_sqlalchemy import SQLAlchemy
-
 from flaskr import create_app
 from models import setup_db, Question, Category
 
@@ -37,7 +36,6 @@ class TriviaTestCase(unittest.TestCase):
         self.no_result_search = {
         "searchTerm":"Jan burger"
         }
-
 
         # binds the app to the current context
         with self.app.app_context():
@@ -86,17 +84,17 @@ class TriviaTestCase(unittest.TestCase):
         data = json.loads(res.data)
         # start with success == False
         self.assertEqual(data['success'],False)
-        self.assertEqual(data['error'],422)
-        self.assertEqual(data['message'],'Unpoccessable')
+        self.assertEqual(data['error'],400)
+        self.assertEqual(data['message'],'Bad request')
     
     def  test_delete_question(self):
         res = self.client().delete('/questions/10')
         data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
      
-
     def test_422_Unproccessable(self):
-        res = self.client().delete('/questions/40')
+        res = self.client().delete('/questions/4000')
         data = json.loads(res.data)
         self.assertEqual(data['success'],False)
         self.assertEqual(data['error'],422)
@@ -107,7 +105,7 @@ class TriviaTestCase(unittest.TestCase):
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(len(data['questions']),2)
+        self.assertGreater(len(data['questions']),0)
 
     def test_no_result_search(self):
         res = self.client().post('/questions', json=self.no_result_search)
@@ -128,12 +126,7 @@ class TriviaTestCase(unittest.TestCase):
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'],True)
-        self.assertEqual(data['total_questions'],2)
-
-        
-       
-        
-
+        self.assertGreater(data['total_questions'],0)
 
 # Make the tests conveniently executable
 if __name__ == "__main__":
