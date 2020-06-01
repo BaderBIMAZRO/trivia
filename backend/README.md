@@ -75,12 +75,12 @@ One note before you delve into your tasks: for each endpoint you are expected to
 
 ### GET /categories
 * Categories endpoint that will return id as key and the value as corresponding string of the category 
-```bat
+```http
 curl http://127.0.0.1:5000/categories 
 
 ```
 * Expected response from categories endpoint
-```json
+```json 
 
 {
   "categories": {
@@ -97,7 +97,7 @@ curl http://127.0.0.1:5000/categories
 ```
 ### GET /questions
 * Questions endpoint will fetch the questions paginated for every 10 questions per page and also category key and value for the frontend which the key will be the id number and the value as corresponding string of the category 
-```bat
+```http
 curl http://127.0.0.1:5000/questions
 
 ```
@@ -193,7 +193,7 @@ curl http://127.0.0.1:5000/questions
 ### DELETE /questions/{question_id}
 * Delete endpoint where the id of question and the page number should be specified below is an successful use of delete request
 
-```bat
+```http
 curl -X DELETE http://127.0.0.1:5000/questions/38?page=3
 
 ```
@@ -210,7 +210,7 @@ curl -X DELETE http://127.0.0.1:5000/questions/38?page=3
 ### POST /questions?page={page_number}
 * For the post endpoint data should have values for question, answer, difficulty and category numbber from 1-5 that are exist in categories endpoint
 
-```bat
+```bash
 curl http://127.0.0.1:5000/questions?page=3 -X POST -H "Content-Type: application/json" -d '{"answer": "new answer", "category": "5", "difficulty": 4, "question": "new question" }'
 ```
 * Expected response from post request
@@ -222,7 +222,7 @@ curl http://127.0.0.1:5000/questions?page=3 -X POST -H "Content-Type: applicatio
 ```
 
 * The ability to search for specific question based of search term.
-```bat
+```bash
 curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d '{"searchTerm":"cup"}'
 
 ```
@@ -254,7 +254,7 @@ curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json"
 ```
 ### GET /categories/{category_id}/questions
 * Return questions based on category id 
-```
+```http
 curl http://127.0.0.1:5000/categories/1/questions
 ``` 
 * Expected response
@@ -365,9 +365,9 @@ curl -X DELETE http://127.0.0.1:5000/questions/200
 
 ```
 * last error you may see 500 Internal Server Error with json format 
-```json
+```json 
 {
-    "success":False,
+    "success":"False",
     "error":500,
     "message":"Internal Server Error"
  }
