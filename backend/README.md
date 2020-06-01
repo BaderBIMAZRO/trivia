@@ -210,7 +210,7 @@ curl -X DELETE http://127.0.0.1:5000/questions/38?page=3
 ### POST /questions?page={page_number}
 * For the post endpoint data should have values for question, answer, difficulty and category numbber from 1-5 that are exist in categories endpoint
 
-```bash
+```http
 curl http://127.0.0.1:5000/questions?page=3 -X POST -H "Content-Type: application/json" -d '{"answer": "new answer", "category": "5", "difficulty": 4, "question": "new question" }'
 ```
 * Expected response from post request
@@ -222,7 +222,7 @@ curl http://127.0.0.1:5000/questions?page=3 -X POST -H "Content-Type: applicatio
 ```
 
 * The ability to search for specific question based of search term.
-```bash
+```http 
 curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d '{"searchTerm":"cup"}'
 
 ```
@@ -335,7 +335,7 @@ http://127.0.0.1:5000/questions?page=100
 ```
 ### 422 Unpoccessable
 * When try to delete question by id that isn't exist
-```bat
+```http
 curl -X DELETE http://127.0.0.1:5000/questions/200
 ```
 * Return 422 with message
